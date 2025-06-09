@@ -1,0 +1,14 @@
+---
+- name: Install Java and Jenkins on Jenkins-Slave
+  hosts: jenkins-slave
+  become: true
+  tasks:
+    - name: Execute Jenkins installation script
+      script: 1.sh
+
+- name: Install Java on Java-Slave
+  hosts: java-slave
+  become: true
+  tasks:
+    - name: Execute Java installation script
+      script: 2.sh
