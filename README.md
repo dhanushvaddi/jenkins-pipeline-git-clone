@@ -35,6 +35,8 @@ https://github.com/dhanushvaddi/jenkins-pipeline-git-clone
 ```hcl
 provider "aws" {
   region = "us-east-1"
+  access_key = "" #get key from IAM user
+  secret_key = "" #get key from IAM user
 }
 
 data "aws_vpc" "default" {
@@ -51,7 +53,7 @@ data "aws_subnets" "default" {
 resource "aws_instance" "ansible_master" {
   ami           = "ami-0a605bc2ef5707a18"
   instance_type = "t2.micro"
-  key_name      = "Oregon"
+  key_name      = "Your-Key-Pair" #Add your key pair
   subnet_id     = element(data.aws_subnets.default.ids, 0)
   associate_public_ip_address = true
   user_data     = file("user_data.sh")
@@ -64,7 +66,7 @@ resource "aws_instance" "ansible_master" {
 resource "aws_instance" "jenkins_slave" {
   ami           = "ami-0a605bc2ef5707a18"
   instance_type = "t2.micro"
-  key_name      = "Oregon"
+  key_name      = "Your-Key-Pair" #Add your key pair
   subnet_id     = element(data.aws_subnets.default.ids, 1)
   associate_public_ip_address = true
 
@@ -76,7 +78,7 @@ resource "aws_instance" "jenkins_slave" {
 resource "aws_instance" "java_slave" {
   ami           = "ami-0a605bc2ef5707a18"
   instance_type = "t2.micro"
-  key_name      = "Oregon"
+  key_name      = "Your-Key-Pair" #Add your key pair
   subnet_id     = element(data.aws_subnets.default.ids, 2)
   associate_public_ip_address = true
 
